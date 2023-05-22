@@ -27,7 +27,7 @@ In order to run this task, couple elements are required :
 |`project`|Name of the project.|`-`|`($ project $)`|`True`|
 |`stack_git_branch`|Branch to use on the public stack Git repository|`-`|`master`|`True`|
 |`terraform_storage_bucket_name`|AWS S3 bucket name to store terraform remote state file.|`-`|`($ organization_canonical $)-terraform-remote-state`|`True`|
-|`terraform_version`|terraform version used to execute your code.|`-`|`'1.0.6'`|`True`|
+|`terraform_version`|terraform version used to execute your code.|`-`|`'1.4.6'`|`True`|
 
 
 ## Terraform - inputs

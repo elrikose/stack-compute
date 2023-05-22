@@ -18,7 +18,7 @@ In order to run this task, couple elements are required :
 |`azure_client_id`|Azure client ID to use for Terraform.|`-`|`((azure_admin.client_id))`|`True`|
 |`azure_client_secret`|Azure client secret to use for Terraform.|`-`|`((azure_admin.client_secret))`|`True`|
 |`azure_env`|Azure environment to use for Terraform. Can be either `public`, `usgovernment`, `german` or `china`.|`-`|`public`|`True`|
-|`azure_location`|Azure location to use for terraform. |`-`|`West Europe`|`True`|
+|`azure_location`|Azure location to use for terraform. |`-`|`East US`|`True`|
 |`azure_subscription_id`|Azure subscription ID to use for Terraform.|`-`|`((azure_admin.subscription_id))`|`True`|
 |`azure_tenant_id`|Azure tenant ID to use for Terraform.|`-`|`((azure_admin.tenant_id))`|`True`|
 |`config_git_branch`|Branch of the config Git repository.|`-`|`master`|`True`|
@@ -34,7 +34,7 @@ In order to run this task, couple elements are required :
 |`terraform_storage_account_name`|Azure Storage Account name to use to store terraform remote state file.|`-`|`((azure_storage_aks.account_name))`|`True`|
 |`terraform_storage_container_name`|Azure Storage container name to store terraform remote state file.|`-`|`($ organization_canonical $)`|`True`|
 |`terraform_storage_container_path`|Azure Storage container path to store terraform remote state file.|`-`|`($ project $)/($ environment $)`|`True`|
-|`terraform_version`|terraform version used to execute your code.|`-`|`'1.0.6'`|`True`|
+|`terraform_version`|terraform version used to execute your code.|`-`|`'1.4.6'`|`True`|
 
 ## Terraform - inputs
 

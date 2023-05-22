@@ -35,5 +35,5 @@ variable "azure_env" {
 
 variable "azure_location" {
   description = "Azure location to use."
-  default     = "West Europe"
+  default     = "East US"
 }

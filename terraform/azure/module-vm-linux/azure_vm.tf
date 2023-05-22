@@ -10,15 +10,34 @@ resource "azurerm_public_ip" "vm_pub_ip" {
   tags                = local.network_tags
 }
 
+resource "azurerm_resource_group" "vm_resource_group" {
+  name     = var.resource_group_name
+  location = var.azure_location
+}
+
+resource "azurerm_virtual_network" "vm_virtual_network" {
+  name                = "vm-network"
+  address_space       = ["10.20.0.0/16"]
+  location            = var.azure_location
+  resource_group_name = azurerm_resource_group.vm_resource_group.name
+}
+
+resource "azurerm_subnet" "vm_subnet" {
+  name                 = "internal"
+  resource_group_name  = azurerm_resource_group.vm_resource_group.name
+  virtual_network_name = azurerm_virtual_network.vm_virtual_network.name
+  address_prefixes     = ["10.20.1.0/24"]
+}
+
 
 resource "azurerm_network_interface" "vm_net_interface" {
   name                = local.network_interface_name
   location            = var.azure_location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.vm_resource_group.name
 
   ip_configuration {
     name                          = local.ip_config_name
-    subnet_id                     = var.subnet_id
+    subnet_id                     = azurerm_subnet.vm_subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.vm_pub_ip.id
     primary                       = true
@@ -35,7 +54,7 @@ resource "azurerm_network_interface" "vm_net_interface" {
 resource "azurerm_network_security_group" "vm_sg" {
   name                = local.network_security_group_name
   location            = var.azure_location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.vm_resource_group.name
 
   security_rule {
     name                       = var.security_rule_name
