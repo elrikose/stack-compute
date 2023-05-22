@@ -2,14 +2,6 @@
 # Network interface
 ###
 
-resource "azurerm_public_ip" "vm_pub_ip" {
-  name                = local.public_ip_name
-  location            = var.azure_location
-  resource_group_name = var.resource_group_name
-  allocation_method   = "Dynamic"
-  tags                = local.network_tags
-}
-
 resource "azurerm_resource_group" "vm_resource_group" {
   name     = var.resource_group_name
   location = var.azure_location
@@ -29,6 +21,13 @@ resource "azurerm_subnet" "vm_subnet" {
   address_prefixes     = ["10.20.1.0/24"]
 }
 
+resource "azurerm_public_ip" "vm_pub_ip" {
+  name                = local.public_ip_name
+  location            = var.azure_location
+  resource_group_name = azurerm_resource_group.vm_resource_group.name
+  allocation_method   = "Dynamic"
+  tags                = local.network_tags
+}
 
 resource "azurerm_network_interface" "vm_net_interface" {
   name                = local.network_interface_name
